@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "cultura-lliure",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "Directori de cultura lliure creat per Pirates de Catalunya",
+  "version": "0.0.1",
+  "author": "Dario Castañé <dario@pirates.cat>",
   "dependencies": {
     "gatsby": "^2.20.12",
     "gatsby-image": "^2.3.1",
@@ -11,6 +11,7 @@
     "gatsby-plugin-offline": "^3.1.2",
     "gatsby-plugin-react-helmet": "^3.2.2",
     "gatsby-plugin-sharp": "^2.5.3",
+    "gatsby-source-drupal": "^3.4.5",
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-transformer-sharp": "^2.4.3",
     "prop-types": "^15.7.2",
