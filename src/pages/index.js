@@ -8,9 +8,9 @@ const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
     <ul>
-      {data.allNodeObra.nodes.map(work => (
-        <Link key={work.id} to={"/" + work.id}>
-          <li>{work.title}</li>
+      {data.allNodeObra.nodes.map(({ drupal_internal__nid, title }) => (
+        <Link key={drupal_internal__nid} to={`/obra/${drupal_internal__nid}`}>
+          <li>{title}</li>
         </Link>
       ))}
     </ul>
@@ -23,23 +23,8 @@ export const query = graphql`
   {
     allNodeObra(filter: { status: { eq: true } }) {
       nodes {
-        id
+        drupal_internal__nid
         title
-        body {
-          value
-        }
-        field_image_link {
-          uri
-        }
-        field_link {
-          uri
-        }
-        field_author
-        field_author_link {
-          uri
-        }
-        field_category
-        field_keywords
       }
     }
   }
