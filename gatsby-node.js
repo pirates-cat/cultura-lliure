@@ -1,3 +1,5 @@
+const pagination = require('gatsby-awesome-pagination')
+
 const path = require(`path`)
 
 // Implement the Gatsby API “createPages”. This is called once the
@@ -5,34 +7,49 @@ const path = require(`path`)
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
-  const workTemplate = path.resolve(`src/templates/work.js`)
-  // Query for recipe nodes to use in creating pages.
-  return graphql(
-    `
-      {
-        works: allNodeObra(filter: { status: { eq: true } }) {
-          nodes {
-            drupal_internal__nid
-            title
+  return new Promise((resolve, reject) => {
+    const workEntry = path.resolve(`src/templates/work.js`)
+    const workIndex = path.resolve(`src/templates/index.js`)
+    resolve(
+      graphql(
+        `
+          {
+            allNodeObra(
+              filter: { status: { eq: true } }
+            ) {
+              nodes {
+                drupal_internal__nid
+                title
+              }
+            }
           }
+        `
+      ).then(result => {
+        if (result.errors) {
+          console.error(result.errors)
+          reject(result.errors)
         }
-      }
-    `
-  ).then(result => {
-    if (result.errors) {
-      throw result.errors
-    }
-
-    // Create pages for each recipe.
-    result.data.works.nodes.forEach((node) => {
-      const slug = `/obra/${node.drupal_internal__nid}/`
-      createPage({
-        path: slug,
-        component: workTemplate,
-        context: {
-          id: node.drupal_internal__nid,
-        },
+  
+        const works = result.data.allNodeObra.nodes
+        pagination.paginate({
+          createPage,
+          items: works,
+          component: workIndex,
+          itemsPerPage: 9,
+          pathPrefix: `/`
+        });
+  
+        works.forEach((work) => {
+          const slug = `/obres/${work.drupal_internal__nid}/`
+          createPage({
+            path: slug,
+            component: workEntry,
+            context: {
+              id: work.drupal_internal__nid,
+            },
+          })
+        })
       })
-    })
+    )
   })
 }
