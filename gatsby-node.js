@@ -1,4 +1,4 @@
-const pagination = require('gatsby-awesome-pagination')
+const pagination = require("gatsby-awesome-pagination")
 
 const path = require(`path`)
 
@@ -14,9 +14,7 @@ exports.createPages = ({ actions, graphql }) => {
       graphql(
         `
           {
-            allNodeObra(
-              filter: { status: { eq: true } }
-            ) {
+            allNodeObra(filter: { status: { eq: true } }) {
               nodes {
                 drupal_internal__nid
                 title
@@ -29,17 +27,17 @@ exports.createPages = ({ actions, graphql }) => {
           console.error(result.errors)
           reject(result.errors)
         }
-  
+
         const works = result.data.allNodeObra.nodes
         pagination.paginate({
           createPage,
           items: works,
           component: workIndex,
           itemsPerPage: 9,
-          pathPrefix: `/`
-        });
-  
-        works.forEach((work) => {
+          pathPrefix: `/`,
+        })
+
+        works.forEach(work => {
           const slug = `/obres/${work.drupal_internal__nid}/`
           createPage({
             path: slug,

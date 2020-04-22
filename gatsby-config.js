@@ -11,9 +11,9 @@ module.exports = {
         baseUrl: `https://participa.pirates.cat/`,
         basicAuth: {
           username: process.env.AUTH_USER,
-          password: process.env.AUTH_PASSWORD
-        }
-      }
+          password: process.env.AUTH_PASSWORD,
+        },
+      },
     },
     `gatsby-plugin-react-helmet`,
     {
@@ -23,14 +23,16 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    `gatsby-plugin-purgecss`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
+        name: `Cultura lliure, directori creat per Pirates de Catalunya`,
+        short_name: `cultura-lliure`,
+        start_url: `/culturalliure`,
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
