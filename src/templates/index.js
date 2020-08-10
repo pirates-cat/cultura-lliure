@@ -67,6 +67,7 @@ export const query = graphql`
   query($skip: Int!, $limit: Int!) {
     works: allNodeObra(
       filter: { status: { eq: true } }
+      sort: { fields: drupal_internal__nid, order: DESC }
       skip: $skip
       limit: $limit
     ) {
